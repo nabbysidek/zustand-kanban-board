@@ -1,10 +1,14 @@
-import React from 'react'
+import "./Columns.css";
+import { Col } from "react-bootstrap";
+import Tasks from "./Tasks";
 
 function Columns({state}) {
+  // the prop is a state because each column represents a specific state
   return (
-    <div className='column'>
-        {state}
-    </div>
+    <Col className='column'>
+      <p>{state}</p>
+      <Tasks title = "Todo"/> 
+    </Col>
   )
 }
 

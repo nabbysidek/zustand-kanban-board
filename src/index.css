@@ -5,9 +5,15 @@
   --color-gray-light: #cccccc;
   --color-ongoing: #98c1d9;
   --color-done: #ee6c4d;
+
+  font-family: Helvetica, sans-serif;
 }
 
 /* body here */
 body {
   margin: 0;
+}
+
+* {
+  box-sizing: border-box; /* enables the padding to be inside of the element and not increase it further than its max width */
 }
