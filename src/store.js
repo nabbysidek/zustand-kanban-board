@@ -6,7 +6,7 @@ const store = (set) => ({
     // basically a state to 'set' up for the whole store
     // and it will return an object {}
 
-    tasks: [{title: "Test Task", state: "planned"}],
+    tasks: [{title: "Test Task", state: "ongoing"}],
 });
 
 export const useStore = create(store);

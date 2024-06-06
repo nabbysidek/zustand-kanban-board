@@ -26,7 +26,12 @@ function Columns({state}) {
   return (
     <Col className='column'>
       <p>{state}</p>
-      <Tasks title = "Todo"/> 
+      {/* display list of tasks by using the mapping method */}
+      {/* the mapping object (in this case is 'task') holds key-value pairs */}
+      {/* With this, the user is expected to define each title of task once */}
+      {tasks.map((task) => (
+        <Tasks title = {task.title} key={task.title} />
+      ))}
     </Col>
   )
 }
