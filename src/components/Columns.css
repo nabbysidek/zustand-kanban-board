@@ -9,3 +9,21 @@
     padding: 0.5rem;
     text-transform: uppercase;
 }
+
+.column-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+    .column-title-wrapper button {
+        all: unset;
+        color: #000;
+        background: #fff;
+        padding: 0 0.5rem 0.4rem 0.5rem;
+        border-radius: 4px;
+        height: fit-content;
+        cursor: pointer;
+    }
+    .column-title-wrapper button:hover {
+        background: var(--color-gray-light);
+    }

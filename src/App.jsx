@@ -1,5 +1,6 @@
-import './App.css'
-import Columns from './components/Columns'
+import './App.css';
+import Columns from './components/Columns';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
