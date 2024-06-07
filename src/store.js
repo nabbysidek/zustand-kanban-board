@@ -8,9 +8,14 @@ const store = (set) => ({
 
     tasks: [{title: "Test Task", state: "ongoing"}],
 
+    // for dragging task
+    // what we want to store in our store
+    draggedTask: null,
+
     // add a function here
     // title and the state are the information we need to add a task
     // we then get it to run the set function as we want to manipulate our store
+    // set for our add task method
     addTask: (title, state) => set((store) => (
         // we also want to check for the current state of the store
         // here, we take in an object and tell it what we want to manipulate
@@ -19,7 +24,7 @@ const store = (set) => ({
         // and adding one new element {title, state} in the array
     )),
 
-    // this is the function to delete task
+    // this is the set for our delete task method
     // we only need to find the title of the task we want to find
     // thus, we filter all the task that are unequal to our title
     // we're basically deleting them as we're overwriting the reference for the task
@@ -29,6 +34,9 @@ const store = (set) => ({
     deleteTask: (title) => set((store) => (
         {tasks: store.tasks.filter(task => task.title !== title)}
     )),
+
+    // the set for our dragged task method
+    setDraggedTask: (title) => set ({ draggedTask: title }),
 });
 
 export const useStore = create(store);

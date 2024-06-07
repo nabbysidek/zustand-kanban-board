@@ -13,23 +13,39 @@ function Tasks({title}) {
     // specify and find the exact task that i used in the prop task in the store.js
     // this will allow us to get the other additional details like status/state
 
+    const setDraggedTask = useStore((store) => store.setDraggedTask);
+
     const deleteTask = useStore((store) => store.deleteTask);
 
   return (
-    <div className='task'>
+    <div
+      className="task"
+      draggable
+      onDragStart={() => {
+        setDraggedTask(task.title);
+        // when we want to start dragging the task
+        // we set the task to be the draggedTask
+      }}
+    >
+      {/* to move each task, make it draggable */}
       <div>{task.title}</div>
       {/* <div>{title}</div> */}
       {/* this is for the debuggingStatus */}
       <div className="bottom-wrapper">
-        <div><FaTrash className="delete-btn" onClick={() => deleteTask(task.title)}/></div>
-        <div className={classNames("status", task.state)}>{task.state}</div> 
+        <div>
+          <FaTrash
+            className="delete-btn"
+            onClick={() => deleteTask(task.title)}
+          />
+        </div>
+        <div className={classNames("status", task.state)}>{task.state}</div>
         {/* <div className={classNames("status", debuggingStatus)}>{debuggingStatus}</div>  */}
         {/* this is for the debuggingStatus */}
         {/* classnames is a library that simplifies adding multiple class names to a component and rendering them conditionally */}
         {/* here, we provide the className "status" and the various arguments which are stored in our debuggingStatus */}
       </div>
     </div>
-  )
+  );
 }
 
 export default Tasks

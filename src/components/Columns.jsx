@@ -31,8 +31,24 @@ function Columns({state}) {
   const addTask = useStore((store) => store.addTask);
   // allow us to add task by using the method in the store
 
+  const setDraggedTask = useStore((store) => store.setDraggedTask);
+  const draggedTask = useStore((store) => store.draggedTask);
+
   return (
-    <Col className="column">
+    <Col
+      className="column"
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+      onDrop={(e) => {
+        console.log(draggedTask);
+        setDraggedTask(null);
+        // we set it to null because we've already dropped it thus, we're no longer dragging it
+        // console.log("drop");
+      }}
+    >
+      {/* the onDragOver is a listener to see whether a task is dragged over the column */}
+      {/* the onDrop is a listener that checks when a task is dropped */}
       <div className="column-title-wrapper">
         <p>{state}</p>
         <Button
