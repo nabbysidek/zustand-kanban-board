@@ -7,13 +7,13 @@
     margin: 0 0.5rem;
     border-radius: 4px;
     padding: 0.5rem;
-    text-transform: uppercase;
 }
 
 .column-title-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-transform: uppercase;
 }
     .column-title-wrapper button {
         all: unset;

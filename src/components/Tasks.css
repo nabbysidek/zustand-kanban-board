@@ -35,3 +35,8 @@
 .done {
     background-color: var(--color-done);
 }
+
+.delete-btn {
+    height: 1.25rem;
+    cursor: pointer;
+}

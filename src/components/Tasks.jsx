@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useStore } from "../store";
+import { FaTrash } from "react-icons/fa";
 import "./Tasks.css";
 
 //  for debugging
@@ -12,13 +13,15 @@ function Tasks({title}) {
     // specify and find the exact task that i used in the prop task in the store.js
     // this will allow us to get the other additional details like status/state
 
+    const deleteTask = useStore((store) => store.deleteTask);
+
   return (
     <div className='task'>
       <div>{task.title}</div>
       {/* <div>{title}</div> */}
       {/* this is for the debuggingStatus */}
       <div className="bottom-wrapper">
-        <div></div>
+        <div><FaTrash className="delete-btn" onClick={() => deleteTask(task.title)}/></div>
         <div className={classNames("status", task.state)}>{task.state}</div> 
         {/* <div className={classNames("status", debuggingStatus)}>{debuggingStatus}</div>  */}
         {/* this is for the debuggingStatus */}
