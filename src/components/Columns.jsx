@@ -1,10 +1,10 @@
 import "./Columns.css";
 import Tasks from "./Tasks";
+import { useState } from "react";
 import { useStore } from "../store";
 import { shallow } from "zustand/shallow";
 import { Col, Button, Modal } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
-import { useState } from "react";
 
 function Columns({state}) {
   // the prop is a state because each column represents a specific state
@@ -70,7 +70,7 @@ function Columns({state}) {
             Close
           </Button>
           <Button
-            variant="primary"
+            variant="dark"
             onClick={() => {
               addTask(text, state);
               setText("");
