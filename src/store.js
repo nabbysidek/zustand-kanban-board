@@ -37,6 +37,14 @@ const store = (set) => ({
 
     // the set for our dragged task method
     setDraggedTask: (title) => set ({ draggedTask: title }),
+
+    moveTask: (title, state) => set((store) => ({
+        tasks: store.tasks.map((task) => (task.title === title ? { title, state } : task)),
+        // basically here, we're trying to map the tasks 
+        // we want to check whether the task is the one that we are moving
+        // if not, we keep it the way it is
+        // if not, we create a new object
+    })),
 });
 
 export const useStore = create(store);

@@ -1,5 +1,6 @@
 import "./Columns.css";
 import Tasks from "./Tasks";
+import classNames from "classnames";
 import { useState } from "react";
 import { useStore } from "../store";
 import { shallow } from "zustand/shallow";
@@ -13,6 +14,8 @@ function Columns({state}) {
   // initialize for user's input field
   const [ open, setOpen ] = useState(false);
   // initialize a modal
+  const [ drop, setDrop ] = useState(false);
+  // initialize whether we have dropped the task into a column
 
   const tasks = useStore((store) => 
     store.tasks.filter((task) => task.state === state),
@@ -34,14 +37,23 @@ function Columns({state}) {
   const setDraggedTask = useStore((store) => store.setDraggedTask);
   const draggedTask = useStore((store) => store.draggedTask);
 
+  const moveTask = useStore((store) => store.moveTask);
+
   return (
     <Col
-      className="column"
+      className={classNames("column", {drop: drop})}
+      // we want to clarfiy that when the task is drop, the css is applied is for .column.drop
       onDragOver={(e) => {
+        setDrop(true);
+        e.preventDefault();
+      }}
+      onDragLeave={(e) => {
+        setDrop(false);
         e.preventDefault();
       }}
       onDrop={(e) => {
-        console.log(draggedTask);
+        setDrop(false);
+        moveTask(draggedTask, state);
         setDraggedTask(null);
         // we set it to null because we've already dropped it thus, we're no longer dragging it
         // console.log("drop");
