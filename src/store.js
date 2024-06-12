@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 const store = (set) => ({
     // define a constant called store
@@ -6,7 +7,8 @@ const store = (set) => ({
     // basically a state to 'set' up for the whole store
     // and it will return an object {}
 
-    tasks: [{title: "Test Task", state: "ongoing"}],
+    // tasks: [{title: "Test Task", state: "ongoing"}],
+    tasks: [],
 
     // for dragging task
     // what we want to store in our store
@@ -22,7 +24,13 @@ const store = (set) => ({
         {tasks: [...store.tasks, {title, state}]}
         // with this, we're taking the already availlable tasks in our store
         // and adding one new element {title, state} in the array
-    )),
+
+        // for debugging using redux devtools, you can give each set function a name
+        // reminder: these functions can take up multiple parameters: 1) set 2) boolean 3) label
+        // the boolean will tell zustand whether or not to replace the whole store with whatever is in this object or whether to just manipulate them
+        // in this case, we want to just change the status so we keep it at false
+        // the label will show up in the debugging tool
+    ), false, "addTask"),
 
     // this is the set for our delete task method
     // we only need to find the title of the task we want to find
@@ -33,7 +41,7 @@ const store = (set) => ({
     // if task.title is not equal to the title passed to deleteTask, that task is included in the new array. otherwise, it is excluded.
     deleteTask: (title) => set((store) => (
         {tasks: store.tasks.filter(task => task.title !== title)}
-    )),
+    ), false, "deleteTask"),
 
     // the set for our dragged task method
     setDraggedTask: (title) => set ({ draggedTask: title }),
@@ -47,4 +55,16 @@ const store = (set) => ({
     })),
 });
 
-export const useStore = create(store);
+// a custom middleware that just logs every stage change
+const log = (config) => (set, get, api) => config(
+    (...args) => {
+        console.log(args);
+        set(...args);
+    },
+    get,
+    api
+);
+
+export const useStore = create(log(persist(devtools(store), {name: "store"})));
+// it saves into a local store, give it a name
+// you can find the local store in console > application > storage > local store
